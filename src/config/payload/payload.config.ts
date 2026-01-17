@@ -1,6 +1,7 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
+import { OAuth2Plugin } from 'payload-oauth2'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
@@ -10,6 +11,9 @@ import { Users, Media } from '@payload-collections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+const serverURL = (process.env.APP_URL || '').replace(/\/$/, '')
+const googleUserInfoUrl = 'https://www.googleapis.com/oauth2/v3/userinfo'
 
 export default buildConfig({
   admin: {
@@ -32,6 +36,37 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
+    OAuth2Plugin({
+      strategyName: 'google',
+      serverURL,
+      authCollection: Users.slug,
+      useEmailAsIdentity: true,
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+      tokenEndpoint: 'https://oauth2.googleapis.com/token',
+      providerAuthorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
+      scopes: ['openid', 'email', 'profile'],
+      getUserInfo: async (accessToken) => {
+        const response = await fetch(googleUserInfoUrl, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        })
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch Google user info')
+        }
+
+        const userInfo = await response.json()
+        return {
+          sub: userInfo.sub,
+          email: userInfo.email,
+          name: userInfo.name,
+          picture: userInfo.picture,
+        }
+      },
+      successRedirect: async () => `${serverURL}/`,
+      failureRedirect: async () => `${serverURL}/login?oauth=error`,
+      
+    }),
     s3Storage({
       collections: {
         media: {
