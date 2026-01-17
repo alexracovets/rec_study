@@ -38,6 +38,24 @@
       "@auth-config": [
         "src/config/auth"
       ],
+      "@atoms": [
+        "src/ui/components/atoms"
+      ],
+      "@molecules": [
+        "src/ui/components/molecules"
+      ],
+      "@organisms": [
+        "src/ui/components/organisms"
+      ],
+      "@templates": [
+        "src/ui/components/templates"
+      ],
+      "@pages": [
+        "src/ui/components/pages"
+      ],
+      "@providers": [
+        "src/providers"
+      ],
       "@styles/*": [
         "src/ui/styles/*"
       ],

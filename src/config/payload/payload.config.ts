@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import path from 'path'
 
-import { Users,Media } from '@payload-collections' 
+import { Users, Media } from '@payload-collections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -14,6 +14,7 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     user: Users.slug,
+    autoRefresh: true,
     importMap: {
       baseDir: path.resolve(dirname),
     },
