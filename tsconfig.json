@@ -27,7 +27,25 @@
         "./src/*"
       ],
       "@payload-config": [
-        "./src/payload.config.ts"
+        "src/config/payload/payload.config.ts"
+      ],
+      "@payload-types": [
+        "src/config/payload/payload-types.ts"
+      ],
+      "@payload-collections": [
+        "src/config/payload/collections"
+      ],
+      "@auth-config": [
+        "src/config/auth"
+      ],
+      "@styles/*": [
+        "src/ui/styles/*"
+      ],
+      "@utils": [
+        "src/utils"
+      ],
+      "@hooks": [
+        "src/hooks"
       ]
     },
     "target": "ES2022",

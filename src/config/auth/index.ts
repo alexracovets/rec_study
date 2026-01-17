@@ -1,0 +1,1 @@
+export { apiConfig, AUTH_API_ENDPOINTS } from './api.config';
