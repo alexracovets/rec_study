@@ -1,0 +1,1 @@
+export { manrope } from './Manrope';

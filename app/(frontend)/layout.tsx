@@ -1,6 +1,8 @@
 import React from 'react'
 
-import { ToastProvider } from '@providers'
+import { DefaultLayout } from '@templates'
+import { manrope, nunito } from '@fonts'
+import { cn } from '@utils'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
@@ -9,15 +11,19 @@ export const metadata = {
 
 import '@styles/styles.css'
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
+interface RootLayoutProps {
+  children: React.ReactNode
+}
+
+export default async function RootLayout(props: RootLayoutProps) {
   const { children } = props
 
   return (
     <html lang="en">
-      <body>
-        <ToastProvider>
+      <body className={cn(manrope.className, nunito.variable, 'grid grid-cols-1 grid-rows-[auto_1fr_auto] min-h-screen')}>
+        <DefaultLayout>
           {children}
-        </ToastProvider>
+        </DefaultLayout>
       </body>
     </html>
   )

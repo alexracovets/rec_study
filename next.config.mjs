@@ -8,6 +8,7 @@ const nextConfig = {
       '.cjs': ['.cts', '.cjs'],
       '.js': ['.ts', '.tsx', '.js', '.jsx'],
       '.mjs': ['.mts', '.mjs'],
+      '.css': ['.css'],
     }
 
     return webpackConfig

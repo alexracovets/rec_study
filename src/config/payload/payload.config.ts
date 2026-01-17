@@ -63,7 +63,7 @@ export default buildConfig({
           picture: userInfo.picture,
         }
       },
-      successRedirect: async () => `${serverURL}/`,
+      successRedirect: async () => `${serverURL}/profile`,
       failureRedirect: async () => `${serverURL}/login?oauth=error`,
       
     }),

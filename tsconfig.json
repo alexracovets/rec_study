@@ -64,6 +64,9 @@
       ],
       "@hooks": [
         "src/hooks"
+      ],
+      "@fonts": [
+        "src/ui/fonts"
       ]
     },
     "target": "ES2022",
