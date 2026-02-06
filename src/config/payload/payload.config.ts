@@ -8,6 +8,7 @@ import sharp from 'sharp'
 import path from 'path'
 
 import { Users, Media } from '@payload-collections'
+import { LOCALES, DEFAULT_LOCALE } from '@constants'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -15,7 +16,17 @@ const dirname = path.dirname(filename)
 const serverURL = (process.env.APP_URL || '').replace(/\/$/, '')
 const googleUserInfoUrl = 'https://www.googleapis.com/oauth2/v3/userinfo'
 
+import { en } from '@payloadcms/translations/languages/en'
+import { uk } from '@payloadcms/translations/languages/uk'
+
 export default buildConfig({
+  i18n: {
+    supportedLanguages: { en, uk },
+  },
+  localization: {
+    locales: LOCALES,
+    defaultLocale: DEFAULT_LOCALE,
+  },
   admin: {
     user: Users.slug,
     autoRefresh: true,
@@ -65,7 +76,7 @@ export default buildConfig({
       },
       successRedirect: async () => `${serverURL}/profile`,
       failureRedirect: async () => `${serverURL}/login?oauth=error`,
-      
+
     }),
     s3Storage({
       collections: {

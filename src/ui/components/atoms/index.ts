@@ -4,4 +4,5 @@ export { Separator } from './Separator/Separator';
 export { Toaster } from './Toaster/Toaster';
 export { Label } from './Label/Label';
 export { Input } from './Input/Input';
+export { Skeleton } from './Skeleton';
 export * from './Field';
