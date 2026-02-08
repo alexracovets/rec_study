@@ -68,6 +68,9 @@
       "@types": [
         "src/ui/types"
       ],
+      "@schemas": [
+        "src/ui/schemas"
+      ],
       "@utils": [
         "src/utils"
       ],
